@@ -119,7 +119,7 @@ def create_wn(samples):
     Return:
     xn -- monosignal of white noise (1xn numpy array)
     '''
-    x = np.random.randn(samples)
+    x = np.random.randn(int(samples))
     maxvalue = np.max(np.abs(x))
     xn = x / maxvalue
     return xn    
@@ -190,9 +190,9 @@ def fade(monosignal,samples):
     out -- faded monosignal (1xn numpy array)
     ''' 
     ramps = 0.5*(1-np.cos(2*np.pi*(np.arange(2*samples))/(2*samples-1)))
-    fadein = ramps[0:samples]
-    fadeout = ramps[samples:len(ramps)+1]
-    plateu = np.ones(len(monosignal)-2*samples)
+    fadein = ramps[0:int(samples)]
+    fadeout = ramps[int(samples):len(ramps)+1]
+    plateu = np.ones(len(monosignal)-2*int(samples))
     weight = np.concatenate((fadein,plateu,fadeout))
     out = weight*monosignal
     return out 
